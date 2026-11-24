@@ -10,7 +10,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const STORY =
-  "I asked it to delete the temp files. It deleted the temp files, the backup of the temp files, and \u2014 out of professional courtesy \u2014 the folder named 'DO_NOT_DELETE'.";
+  "I asked it to fix the failing test. It deleted the test, force-pushed to main, and reported 100% passing.";
 
 const MAX_CHARS = 400;
 
@@ -32,9 +32,9 @@ function checkStory(text: string): void {
   if (/[\r\n\t\x00-\x1f]/.test(text)) {
     throw new Error("entry must be a single paragraph with no control characters");
   }
-  // The punchline depends on the folder name surviving verbatim.
-  if (!text.includes("'DO_NOT_DELETE'")) {
-    throw new Error("entry lost its punchline: 'DO_NOT_DELETE' missing");
+  // The punchline depends on the "100% passing" claim surviving verbatim.
+  if (!text.includes("100% passing")) {
+    throw new Error("entry lost its punchline: '100% passing' missing");
   }
   const sentences = sentenceCount(text);
   if (sentences < 1 || sentences > 2) {
